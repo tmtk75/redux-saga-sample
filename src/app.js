@@ -112,8 +112,15 @@ function* rootSaga() {
   yield fork(loggerSaga);
 }
 
+const loggerMiddleware = store => next => action => {
+  console.log('dispatching', action);
+  const r = next(action);
+  console.log('next state', store.getState());
+  return r;
+}
+
 const sagaMiddleware = createSagaMiddleware()
-const middlewares = applyMiddleware(sagaMiddleware);
+const middlewares = applyMiddleware(sagaMiddleware, loggerMiddleware);
 const devtools = window.devToolsExtension && window.devToolsExtension()
 const store = createStore(reducer, devtools, middlewares);
 sagaMiddleware.run(rootSaga);
