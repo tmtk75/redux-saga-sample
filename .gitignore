@@ -1,0 +1,15 @@
+#
+.*.swp
+npm-debug.log
+/node_modules
+/*.png
+
+# Electron
+/.userData
+
+# Generated
+/dist
+
+# Symlinks
+/react-devtools
+/redux-devtools
